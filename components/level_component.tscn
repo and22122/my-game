@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://fkjldcxihekb"]
+
+[ext_resource type="Script" uid="uid://bf4so4jpoteid" path="res://level.gd" id="1_e7uma"]
+[ext_resource type="PackedScene" uid="uid://7o1yhrsc0ypg" path="res://components/platform.tscn" id="2_0k3oq"]
+
+[node name="LevelComponent" type="Node"]
+script = ExtResource("1_e7uma")
+
+[node name="BottomLeft" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(10.000001, 170.00002)
+
+[node name="BottomRight" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(250, 170.00002)
+
+[node name="TopRight" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(250, 10.000015)
+
+[node name="Bottom" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(130.00002, 170.00002)
+scale = Vector2(11, 1)
+
+[node name="Top" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(130, 10.000015)
+scale = Vector2(11, 1)
+
+[node name="TopLeft" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(10, 10)
+
+[node name="Left" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(10, 90)
+scale = Vector2(1, 7)
+
+[node name="Right" parent="." instance=ExtResource("2_0k3oq")]
+position = Vector2(250, 90)
+scale = Vector2(1, 7)

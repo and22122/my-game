@@ -1,0 +1,121 @@
+[gd_scene load_steps=18 format=3 uid="uid://bxmi5khvq3dhn"]
+
+[ext_resource type="Texture2D" uid="uid://def31gh7n1qtw" path="res://assets/Jump1.png" id="1_mm1xv"]
+[ext_resource type="Script" uid="uid://bo4ltl0fapwp0" path="res://scripts/player.gd" id="1_qe8hj"]
+[ext_resource type="Texture2D" uid="uid://cmhbco34gxmtd" path="res://assets/Jump4.png" id="2_qe8hj"]
+[ext_resource type="Texture2D" uid="uid://dnh25smyfe6yk" path="res://assets/Idle1.png" id="3_eju5v"]
+[ext_resource type="Texture2D" uid="uid://dgdsufqv3creh" path="res://assets/Idle2.png" id="4_7ta67"]
+[ext_resource type="Texture2D" uid="uid://dn6kud5gcfidc" path="res://assets/Jump2.png" id="5_jhk7o"]
+[ext_resource type="Texture2D" uid="uid://cdwlgq4erhxes" path="res://assets/Jump3.png" id="6_1wqow"]
+[ext_resource type="Texture2D" uid="uid://ytg0wbtwlmjq" path="res://assets/Right1.png" id="7_6qb5m"]
+[ext_resource type="Texture2D" uid="uid://cil4yyqq4v07c" path="res://assets/Right2.png" id="8_kn8w6"]
+[ext_resource type="Texture2D" uid="uid://ck2inoo46h3fl" path="res://assets/Right3.png" id="9_eaetu"]
+[ext_resource type="PackedScene" uid="uid://cexf3njgun1cf" path="res://components/gravity_component.tscn" id="10_1dyya"]
+[ext_resource type="PackedScene" uid="uid://byjd0t714ofa" path="res://components/input_component.tscn" id="12_eju5v"]
+[ext_resource type="PackedScene" uid="uid://dag8i3aeho5u3" path="res://components/movement_component.tscn" id="13_7ta67"]
+[ext_resource type="PackedScene" uid="uid://cohvxqbmck5yc" path="res://components/animation_component.tscn" id="14_jhk7o"]
+[ext_resource type="PackedScene" uid="uid://cj6espf8ry3s4" path="res://components/jump_component.tscn" id="15_1wqow"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sh265"]
+animations = [{
+"frames": [{
+"duration": 30.0,
+"texture": ExtResource("1_mm1xv")
+}],
+"loop": true,
+"name": &"crouch1",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 30.0,
+"texture": ExtResource("2_qe8hj")
+}],
+"loop": true,
+"name": &"crouch2",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eju5v")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": ExtResource("3_eju5v")
+}, {
+"duration": 15.0,
+"texture": ExtResource("4_7ta67")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jhk7o")
+}],
+"loop": true,
+"name": &"jump1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1wqow")
+}],
+"loop": true,
+"name": &"jump2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6qb5m")
+}],
+"loop": true,
+"name": &"turn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": ExtResource("8_kn8w6")
+}, {
+"duration": 10.0,
+"texture": ExtResource("9_eaetu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 30.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4flbx"]
+radius = 4.0
+height = 18.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "jump_component")]
+script = ExtResource("1_qe8hj")
+gravity_component = NodePath("GravityComponent")
+input_component = NodePath("InputComponent")
+movement_component = NodePath("MovementComponent")
+animation_component = NodePath("AnimationComponent")
+jump_component = NodePath("JumpComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sh265")
+animation = &"jump2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_4flbx")
+
+[node name="GravityComponent" parent="." instance=ExtResource("10_1dyya")]
+
+[node name="InputComponent" parent="." instance=ExtResource("12_eju5v")]
+
+[node name="MovementComponent" parent="." instance=ExtResource("13_7ta67")]
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("14_jhk7o")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="JumpComponent" parent="." instance=ExtResource("15_1wqow")]

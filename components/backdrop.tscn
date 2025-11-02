@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://btqjqbxmxufbw"]
+
+[ext_resource type="Script" uid="uid://hnxicsf1kqlu" path="res://scripts/backdrop.gd" id="1_jia0n"]
+[ext_resource type="Texture2D" uid="uid://bv3ik65ewco1o" path="res://assets/woodTexture.png" id="1_k8lof"]
+[ext_resource type="PackedScene" uid="uid://cxowtxc400aqm" path="res://components/card.tscn" id="2_vhd1p"]
+[ext_resource type="Texture2D" uid="uid://bnivlefkyrioy" path="res://assets/DefaultHandCard.png" id="3_330ut"]
+[ext_resource type="PackedScene" uid="uid://bxmi5khvq3dhn" path="res://player.tscn" id="4_o8dhb"]
+[ext_resource type="PackedScene" uid="uid://fkjldcxihekb" path="res://components/level_component.tscn" id="4_vhd1p"]
+
+[node name="Backdrop" type="Node2D"]
+script = ExtResource("1_jia0n")
+metadata/_edit_vertical_guides_ = [20.0, 60.0, 100.0, 140.0, 180.0, 220.0]
+metadata/_edit_horizontal_guides_ = [20.0, 60.0, 100.0, 140.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Card" parent="." instance=ExtResource("2_vhd1p")]
+position = Vector2(261, 21)
+
+[node name="Blocks" parent="Card" index="2"]
+visible = true
+
+[node name="HandIcon" parent="Card" index="4"]
+position = Vector2(289, 29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_330ut")
+
+[node name="PlayedIcon" parent="Card" index="5"]
+texture = ExtResource("3_330ut")
+
+[node name="Card2" parent="." instance=ExtResource("2_vhd1p")]
+position = Vector2(261, 21)
+
+[node name="Card3" parent="." instance=ExtResource("2_vhd1p")]
+
+[node name="Card4" parent="." instance=ExtResource("2_vhd1p")]
+
+[node name="Card5" parent="." instance=ExtResource("2_vhd1p")]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_k8lof")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("4_o8dhb")]
+position = Vector2(41, 144)
+scale = Vector2(1.5, 1.5)
+
+[node name="LevelComponent" parent="." instance=ExtResource("4_vhd1p")]
+
+[node name="Score" type="Label" parent="."]
+z_index = 1
+offset_left = 100.0
+offset_top = -3.0
+offset_right = 161.0
+offset_bottom = 20.0
+size_flags_vertical = 0
+text = "Score: 0"
+vertical_alignment = 1
+
+[editable path="Card"]

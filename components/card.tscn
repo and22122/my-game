@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxowtxc400aqm"]
+
+[ext_resource type="Script" uid="uid://captnmisam7lw" path="res://components/card.gd" id="1_owxsn"]
+[ext_resource type="PackedScene" uid="uid://7o1yhrsc0ypg" path="res://components/platform.tscn" id="3_pxcjn"]
+
+[sub_resource type="Theme" id="Theme_i0r0c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i0r0c"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i0r0c"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owxsn"]
+
+[node name="Card" type="Node" node_paths=PackedStringArray("hand_icon", "played_icon", "msg")]
+script = ExtResource("1_owxsn")
+hand_icon = NodePath("HandIcon")
+played_icon = NodePath("PlayedIcon")
+msg = NodePath("Message")
+metadata/_edit_horizontal_guides_ = [20.0, 60.0, 100.0, 140.0]
+metadata/_edit_vertical_guides_ = [20.0, 180.0, 60.0, 140.0, 100.0, 220.0]
+
+[node name="CardBack" type="ColorRect" parent="."]
+offset_left = 271.0
+offset_top = 20.0
+offset_right = 307.0
+offset_bottom = 60.0
+color = Color(1, 0.8784314, 0, 1)
+
+[node name="Message" type="Label" parent="."]
+offset_left = 271.0
+offset_top = 37.0
+offset_right = 307.0
+offset_bottom = 60.0
+theme = SubResource("Theme_i0r0c")
+text = "text"
+label_settings = SubResource("LabelSettings_i0r0c")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Blocks" type="Node2D" parent="."]
+visible = false
+
+[node name="BottomLeft" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(10.000001, 170.00002)
+
+[node name="BottomRight" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(250, 170.00002)
+
+[node name="TopRight" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(250, 10.000015)
+
+[node name="Bottom" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(130.00002, 170.00002)
+scale = Vector2(11, 1)
+
+[node name="Top" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(130, 10.000015)
+scale = Vector2(11, 1)
+
+[node name="TopLeft" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(10, 10)
+
+[node name="Left" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(10, 90)
+scale = Vector2(1, 7)
+
+[node name="Right" parent="Blocks" instance=ExtResource("3_pxcjn")]
+position = Vector2(250, 90)
+scale = Vector2(1, 7)
+
+[node name="Apply" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Select Card" type="Button" parent="Apply"]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 20.0
+offset_right = 307.0
+offset_bottom = 60.0
+flat = true
+
+[node name="Play Card" type="Button" parent="Apply"]
+visible = false
+layout_mode = 0
+offset_left = 268.0
+offset_top = 60.0
+offset_right = 309.0
+offset_bottom = 91.0
+text = "Play"
+
+[node name="HandIcon" type="Sprite2D" parent="."]
+position = Vector2(271, 20)
+scale = Vector2(35.99999, 18)
+texture = SubResource("PlaceholderTexture2D_i0r0c")
+
+[node name="PlayedIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(21, 21)
+scale = Vector2(63.999996, 36)
+texture = SubResource("PlaceholderTexture2D_owxsn")
+
+[connection signal="focus_entered" from="Apply/Select Card" to="." method="_on_select_card_focus_entered"]
+[connection signal="pressed" from="Apply/Select Card" to="." method="_on_select_card_pressed"]
+[connection signal="focus_exited" from="Apply/Play Card" to="." method="_on_play_card_focus_exited"]
+[connection signal="pressed" from="Apply/Play Card" to="." method="_on_play_card_pressed"]
